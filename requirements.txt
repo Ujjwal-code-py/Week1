@@ -1,6 +1,3 @@
-
-### **3. `requirements.txt`** (in root)
-```txt
 Flask==2.3.3
 opencv-python==4.8.1.78
 numpy==1.24.3
