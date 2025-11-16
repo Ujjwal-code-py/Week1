@@ -9,4 +9,4 @@ services:
     startCommand: cd pothole_webapp && gunicorn app:app
     envVars:
       - key: PYTHON_VERSION
-        value: 3.13.2
+        value: 3.9.8
