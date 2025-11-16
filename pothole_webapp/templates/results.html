@@ -1,0 +1,90 @@
+document.getElementById('uploadForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const formData = new FormData(this);
+    const analyzeBtn = document.getElementById('analyzeBtn');
+    const loading = document.getElementById('loading');
+    const results = document.getElementById('results');
+    
+    // Show loading, hide results
+    loading.classList.remove('hidden');
+    results.classList.add('hidden');
+    analyzeBtn.disabled = true;
+    
+    try {
+        const response = await fetch('/upload', {
+            method: 'POST',
+            body: formData
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            displayResults(data);
+        } else {
+            alert('Error: ' + data.error);
+        }
+    } catch (error) {
+        alert('Upload failed: ' + error.message);
+    } finally {
+        loading.classList.add('hidden');
+        analyzeBtn.disabled = false;
+    }
+});
+
+function displayResults(data) {
+    const resultsDiv = document.getElementById('results');
+    
+    resultsDiv.innerHTML = `
+        <div class="results-content">
+            <h2>Analysis Complete! 🎉</h2>
+            
+            <div class="summary-cards">
+                <div class="summary-card">
+                    <h3>Potholes Detected</h3>
+                    <div class="number">${data.potholes_detected}</div>
+                </div>
+                <div class="summary-card">
+                    <h3>Total Volume</h3>
+                    <div class="number">${data.cost_breakdown.total_volume_liters.toFixed(1)} L</div>
+                </div>
+                <div class="summary-card">
+                    <h3>Total Cost</h3>
+                    <div class="number">₹${data.cost_breakdown.total_cost.toFixed(2)}</div>
+                </div>
+            </div>
+            
+            <div class="result-image">
+                <img src="/results/${data.result_image}" alt="Analysis Result">
+            </div>
+            
+            <div class="pothole-details">
+                <h3>Pothole Details</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Width (cm)</th>
+                            <th>Depth (cm)</th>
+                            <th>Volume (L)</th>
+                            <th>Confidence</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${data.pothole_data.map(pothole => `
+                            <tr>
+                                <td>${pothole.id}</td>
+                                <td>${pothole.width_cm.toFixed(1)}</td>
+                                <td>${pothole.depth_cm.toFixed(1)}</td>
+                                <td>${pothole.volume_liters.toFixed(2)}</td>
+                                <td>${pothole.confidence.toFixed(3)}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    `;
+    
+    resultsDiv.classList.remove('hidden');
+}

@@ -1,0 +1,7 @@
+path: ./dataset
+train: train
+val: test
+test: test
+
+nc: 1
+names: ['pothole']

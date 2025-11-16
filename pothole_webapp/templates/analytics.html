@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics - Pothole Inspector Pro</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Navigation Header -->
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <i class="fas fa-road"></i>
+                    <span>PotholeInspector</span>
+                    <sup class="pro-badge">PRO</sup>
+                </div>
+                <!-- Update the navigation section in analytics.html -->
+            <div class="nav-links">
+                <a href="/" class="nav-link"><i class="fas fa-home"></i> Home</a>
+                <a href="/analytics" class="nav-link active"><i class="fas fa-chart-bar"></i> Analytics</a>
+                <!-- <a href="#history" class="nav-link" onclick="showHistoryPage()"><i class="fas fa-history"></i> History</a> -->
+            </div>
+            </div>
+        </nav>
+
+        <!-- Analytics Content -->
+        <main class="main-content">
+            <!-- Hero Section -->
+            <section class="hero-section">
+                <div class="hero-content">
+                    <h1 class="hero-title">
+                        <span class="hero-gradient">Road Infrastructure Analytics</span>
+                    </h1>
+                    <p class="hero-subtitle">Comprehensive insights into pothole-related accidents, economic impact, and road maintenance efficiency</p>
+                </div>
+            </section>
+
+            <!-- Key Metrics -->
+            <section class="analytics-section">
+                <div class="section-card">
+                    <h2 style="text-align: center; margin-bottom: 2rem;">
+                        <i class="fas fa-tachometer-alt"></i> Key Performance Indicators
+                    </h2>
+                    
+                    <div class="metrics-grid">
+                        <div class="metric-card critical">
+                            <div class="metric-icon">
+                                <i class="fas fa-car-crash"></i>
+                            </div>
+                            <div class="metric-content">
+                                <div class="metric-value">2,847</div>
+                                <div class="metric-label">Annual Pothole Accidents</div>
+                                <div class="metric-trend negative">+12% from last year</div>
+                            </div>
+                        </div>
+                        
+                        <div class="metric-card warning">
+                            <div class="metric-icon">
+                                <i class="fas fa-money-bill-wave"></i>
+                            </div>
+                            <div class="metric-content">
+                                <div class="metric-value">₹4.2Cr</div>
+                                <div class="metric-label">Annual Vehicle Damage Costs</div>
+                                <div class="metric-trend negative">+18% increase</div>
+                            </div>
+                        </div>
+                        
+                        <div class="metric-card success">
+                            <div class="metric-icon">
+                                <i class="fas fa-hard-hat"></i>
+                            </div>
+                            <div class="metric-content">
+                                <div class="metric-value">68%</div>
+                                <div class="metric-label">Repair Efficiency</div>
+                                <div class="metric-trend positive">+5% improvement</div>
+                            </div>
+                        </div>
+                        
+                        <div class="metric-card info">
+                            <div class="metric-icon">
+                                <i class="fas fa-road"></i>
+                            </div>
+                            <div class="metric-content">
+                                <div class="metric-value">15.2K</div>
+                                <div class="metric-label">Km of Roads Monitored</div>
+                                <div class="metric-trend positive">+25% coverage</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Accident Analytics -->
+            <section class="analytics-section">
+                <div class="section-card">
+                    <h2 style="margin-bottom: 2rem; display: flex; align-items: center; gap: 1rem;">
+                        <i class="fas fa-car-crash" style="color: var(--error);"></i>
+                        Pothole-Related Accident Reports
+                    </h2>
+                    
+                    <div class="analytics-grid">
+                        <div class="chart-container">
+                            <h3>Monthly Accident Trends</h3>
+                            <canvas id="accidentChart" width="400" height="200"></canvas>
+                        </div>
+                        
+                        <div class="chart-container">
+                            <h3>Accident Severity Distribution</h3>
+                            <canvas id="severityChart" width="400" height="200"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="accident-stats">
+                        <div class="stat-item">
+                            <div class="stat-number critical">42%</div>
+                            <div class="stat-label">of urban accidents are pothole-related</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number warning">3.2x</div>
+                            <div class="stat-label">higher risk during monsoon season</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number info">67%</div>
+                            <div class="stat-label">involve two-wheelers</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Economic Impact -->
+            <section class="analytics-section">
+                <div class="section-card">
+                    <h2 style="margin-bottom: 2rem; display: flex; align-items: center; gap: 1rem;">
+                        <i class="fas fa-chart-line" style="color: var(--warning);"></i>
+                        Economic Impact Analysis
+                    </h2>
+                    
+                    <div class="analytics-grid">
+                        <div class="chart-container">
+                            <h3>Cost Breakdown of Pothole Impact</h3>
+                            <canvas id="costChart" width="400" height="200"></canvas>
+                        </div>
+                        
+                        <div class="chart-container">
+                            <h3>Annual Cost Trends (in Crores)</h3>
+                            <canvas id="trendChart" width="400" height="200"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="economic-insights">
+                        <h3>Key Financial Insights</h3>
+                        <div class="insights-grid">
+                            <div class="insight-card negative">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <div class="insight-content">
+                                    <div class="insight-title">Waste in Manual Inspection</div>
+                                    <div class="insight-value">₹1.8Cr annually</div>
+                                    <div class="insight-desc">Traditional methods are 40% less efficient</div>
+                                </div>
+                            </div>
+                            
+                            <div class="insight-card positive">
+                                <i class="fas fa-robot"></i>
+                                <div class="insight-content">
+                                    <div class="insight-title">AI Savings Potential</div>
+                                    <div class="insight-value">₹2.5Cr annually</div>
+                                    <div class="insight-desc">With automated detection systems</div>
+                                </div>
+                            </div>
+                            
+                            <div class="insight-card info">
+                                <i class="fas fa-clock"></i>
+                                <div class="insight-content">
+                                    <div class="insight-title">Response Time Impact</div>
+                                    <div class="insight-value">60% faster</div>
+                                    <div class="insight-desc">AI detection reduces repair time significantly</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Regional Analysis -->
+            <section class="analytics-section">
+                <div class="section-card">
+                    <h2 style="margin-bottom: 2rem; display: flex; align-items: center; gap: 1rem;">
+                        <i class="fas fa-map-marked-alt" style="color: var(--primary);"></i>
+                        Regional Risk Analysis
+                    </h2>
+                    
+                    <div class="analytics-grid">
+                        <div class="chart-container full-width">
+                            <h3>High-Risk Zones by City</h3>
+                            <canvas id="regionalChart" width="600" height="250"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="risk-zones">
+                        <h3>Top 5 High-Risk Areas</h3>
+                        <div class="zones-list">
+                            <div class="zone-item high-risk">
+                                <span class="zone-rank">1</span>
+                                <div class="zone-info">
+                                    <div class="zone-name">Mumbai Western Expressway</div>
+                                    <div class="zone-stats">428 accidents • ₹3.2Cr damage</div>
+                                </div>
+                                <div class="zone-risk">Very High</div>
+                            </div>
+                            
+                            <div class="zone-item high-risk">
+                                <span class="zone-rank">2</span>
+                                <div class="zone-info">
+                                    <div class="zone-name">Delhi Ring Road</div>
+                                    <div class="zone-stats">392 accidents • ₹2.8Cr damage</div>
+                                </div>
+                                <div class="zone-risk">Very High</div>
+                            </div>
+                            
+                            <div class="zone-item medium-risk">
+                                <span class="zone-rank">3</span>
+                                <div class="zone-info">
+                                    <div class="zone-name">Bangalore Outer Ring Road</div>
+                                    <div class="zone-stats">315 accidents • ₹2.1Cr damage</div>
+                                </div>
+                                <div class="zone-risk">High</div>
+                            </div>
+                            
+                            <div class="zone-item medium-risk">
+                                <span class="zone-rank">4</span>
+                                <div class="zone-info">
+                                    <div class="zone-name">Chennai GST Road</div>
+                                    <div class="zone-stats">287 accidents • ₹1.9Cr damage</div>
+                                </div>
+                                <div class="zone-risk">High</div>
+                            </div>
+                            
+                            <div class="zone-item low-risk">
+                                <span class="zone-rank">5</span>
+                                <div class="zone-info">
+                                    <div class="zone-name">Hyderabad IT Corridor</div>
+                                    <div class="zone-stats">234 accidents • ₹1.6Cr damage</div>
+                                </div>
+                                <div class="zone-risk">Medium</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Prevention Recommendations -->
+            <section class="analytics-section">
+                <div class="section-card">
+                    <h2 style="margin-bottom: 2rem; display: flex; align-items: center; gap: 1rem;">
+                        <i class="fas fa-lightbulb" style="color: var(--success);"></i>
+                        Strategic Recommendations
+                    </h2>
+                    
+                    <div class="recommendations-grid">
+                        <div class="recommendation-card">
+                            <div class="rec-icon">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <div class="rec-content">
+                                <h3>AI-Powered Monitoring</h3>
+                                <p>Implement continuous AI surveillance on high-risk routes to reduce inspection costs by 60%</p>
+                                <div class="rec-impact">
+                                    <span class="impact-value">₹1.2Cr</span>
+                                    <span class="impact-label">Annual Savings</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="recommendation-card">
+                            <div class="rec-icon">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                            <div class="rec-content">
+                                <h3>Rapid Response Teams</h3>
+                                <p>Deploy dedicated repair teams in high-risk zones to reduce accident rates by 45%</p>
+                                <div class="rec-impact">
+                                    <span class="impact-value">₹0.8Cr</span>
+                                    <span class="impact-label">Damage Prevention</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="recommendation-card">
+                            <div class="rec-icon">
+                                <i class="fas fa-chart-pie"></i>
+                            </div>
+                            <div class="rec-content">
+                                <h3>Predictive Maintenance</h3>
+                                <p>Use historical data to predict and prevent pothole formation before accidents occur</p>
+                                <div class="rec-impact">
+                                    <span class="impact-value">₹1.5Cr</span>
+                                    <span class="impact-label">Cost Avoidance</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/analytics.js') }}"></script>
+</body>
+</html>

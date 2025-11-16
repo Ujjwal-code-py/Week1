@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pothole Inspector Pro - AI Road Analysis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Navigation Header -->
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <i class="fas fa-road"></i>
+                    <span>PotholeInspector</span>
+                    <sup class="pro-badge">PRO</sup>
+                </div>
+                <!-- Update the navigation section in index.html -->
+                <div class="nav-links">
+                    <a href="/" class="nav-link active"><i class="fas fa-home"></i> Home</a>
+                    <a href="/analytics" class="nav-link"><i class="fas fa-chart-bar"></i> Analytics</a>
+                    <!-- <a href="#history" class="nav-link" onclick="showHistoryPage()"><i class="fas fa-history"></i> History</a> -->
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Hero Section -->
+            <section class="hero-section">
+                <div class="hero-content">
+                    <h1 class="hero-title">
+                        <span class="hero-gradient">AI-Powered Road Inspection</span>
+                    </h1>
+                    <p class="hero-subtitle">Upload road images or videos to automatically detect potholes, estimate repair costs, and generate detailed analysis reports</p>
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <div class="stat-number">99%</div>
+                            <div class="stat-label">Detection Accuracy</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">₹2M+</div>
+                            <div class="stat-label">Costs Saved</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">5K+</div>
+                            <div class="stat-label">Roads Analyzed</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Upload Section -->
+            <section class="upload-section">
+                <div class="section-card">
+                    <div class="card-header">
+                        <i class="fas fa-cloud-upload-alt card-icon"></i>
+                        <h2>Upload Media for Analysis</h2>
+                        <p>Supported formats: JPG, PNG, MP4, AVI, MOV</p>
+                    </div>
+
+                    <form id="uploadForm" enctype="multipart/form-data" class="upload-form">
+                        <!-- File Upload -->
+                        <div class="file-upload-area">
+                            <input type="file" id="fileInput" name="file" accept="image/*,video/*" required>
+                            <div class="upload-box" id="uploadBox">
+                                <div class="upload-icon">
+                                    <i class="fas fa-video"></i>
+                                    <i class="fas fa-image"></i>
+                                </div>
+                                <div class="upload-text">
+                                    <h3>Drop your road media here</h3>
+                                    <p>or click to browse files</p>
+                                </div>
+                                <div class="upload-features">
+                                    <div class="feature">
+                                        <i class="fas fa-bolt"></i>
+                                        <span>Fast AI Analysis</span>
+                                    </div>
+                                    <div class="feature">
+                                        <i class="fas fa-chart-pie"></i>
+                                        <span>Cost Breakdown</span>
+                                    </div>
+                                    <div class="feature">
+                                        <i class="fas fa-file-pdf"></i>
+                                        <span>Export Reports</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="filePreview" class="file-preview hidden">
+                                <div class="preview-content">
+                                    <div class="file-type-icon" id="fileIcon">
+                                        <i class="fas fa-file"></i>
+                                    </div>
+                                    <div class="file-info">
+                                        <div class="file-name" id="fileName"></div>
+                                        <div class="file-meta">
+                                            <span class="file-size" id="fileSize"></span>
+                                            <span class="file-type" id="fileType"></span>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="remove-file" onclick="clearFile()">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Cost Parameters -->
+                        <div class="cost-parameters">
+                            <div class="parameters-header">
+                                <i class="fas fa-calculator"></i>
+                                <h3>Cost Estimation Parameters</h3>
+                            </div>
+                            <div class="parameters-grid">
+                                <div class="parameter-group">
+                                    <label for="material_cost">
+                                        <i class="fas fa-hard-hat"></i>
+                                        Material Cost (₹/liter)
+                                    </label>
+                                    <div class="input-with-presets">
+                                        <input type="number" id="material_cost" name="material_cost" value="45" min="0" step="0.1" required>
+                                        <div class="preset-buttons">
+                                            <button type="button" class="preset-btn" data-target="material_cost" data-value="40">Economy</button>
+                                            <button type="button" class="preset-btn" data-target="material_cost" data-value="45">Standard</button>
+                                            <button type="button" class="preset-btn" data-target="material_cost" data-value="55">Premium</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="parameter-group">
+                                    <label for="labor_cost">
+                                        <i class="fas fa-users"></i>
+                                        Labor Cost (₹/hour)
+                                    </label>
+                                    <div class="input-with-presets">
+                                        <input type="number" id="labor_cost" name="labor_cost" value="350" min="0" step="1" required>
+                                        <div class="preset-buttons">
+                                            <button type="button" class="preset-btn" data-target="labor_cost" data-value="300">Basic</button>
+                                            <button type="button" class="preset-btn" data-target="labor_cost" data-value="350">Standard</button>
+                                            <button type="button" class="preset-btn" data-target="labor_cost" data-value="400">Skilled</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="parameter-group">
+                                    <label for="team_size">
+                                        <i class="fas fa-user-friends"></i>
+                                        Team Size
+                                    </label>
+                                    <input type="number" id="team_size" name="team_size" value="2" min="1" step="1" required>
+                                </div>
+                                <div class="parameter-group">
+                                    <label for="overhead">
+                                        <i class="fas fa-chart-line"></i>
+                                        Overhead (%)
+                                    </label>
+                                    <input type="number" id="overhead" name="overhead" value="15" min="0" step="0.1" required>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Add this section after the Cost Parameters section -->
+                    <div class="location-section">
+                            <div class="parameters-header">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <h3>Pothole Location Information</h3>
+                            </div>
+
+                            <div class="location-inputs">
+                                <div class="parameter-group">
+                                    <label for="location_name">
+                                        <i class="fas fa-road"></i>
+                                        Road/Location Name
+                                    </label>
+                                    <input type="text" id="location_name" name="location_name" 
+                                           placeholder="e.g., MG Road, Sector 15" required>
+                                </div>
+
+                                <div class="location-grid">
+                                    <div class="parameter-group">
+                                        <label for="latitude">
+                                            <i class="fas fa-globe"></i>
+                                            Latitude
+                                        </label>
+                                        <div class="input-with-button">
+                                            <input type="number" id="latitude" name="latitude" 
+                                                   step="any" placeholder="e.g., 28.6139">
+                                            <button type="button" class="get-location-btn" id="getCurrentLocation">
+                                                <i class="fas fa-location-arrow"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div class="parameter-group">
+                                        <label for="longitude">
+                                            <i class="fas fa-globe"></i>
+                                            Longitude
+                                        </label>
+                                        <input type="number" id="longitude" name="longitude" 
+                                               step="any" placeholder="e.g., 77.2090">
+                                    </div>
+                                </div>
+
+                                <div class="parameter-group">
+                                    <label for="city">
+                                        <i class="fas fa-city"></i>
+                                        City
+                                    </label>
+                                    <input type="text" id="city" name="city" placeholder="e.g., New Delhi" required>
+                                </div>
+
+                                <div class="parameter-group">
+                                    <label for="additional_notes">
+                                        <i class="fas fa-sticky-note"></i>
+                                        Additional Notes
+                                    </label>
+                                    <textarea id="additional_notes" name="additional_notes" 
+                                             placeholder="Any additional information about the location..." 
+                                             rows="3"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" id="analyzeBtn" class="analyze-button">
+                            <span class="btn-content">
+                                <i class="fas fa-search"></i>
+                                <span class="btn-text">Analyze Road Conditions</span>
+                            </span>
+                            <div class="btn-loading hidden">
+                                <div class="loading-spinner"></div>
+                                <span>Processing Media...</span>
+                            </div>
+                        </button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Loading State -->
+            <div id="loading" class="loading-section hidden">
+                <div class="loading-card">
+                    <div class="loading-animation">
+                        <div class="pothole-loader">
+                            <div class="road-line"></div>
+                            <div class="pothole"></div>
+                            <div class="car">
+                                <i class="fas fa-car"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="loading-content">
+                        <h3>Analyzing Road Infrastructure</h3>
+                        <p id="loadingText">Initializing AI models and processing your media...</p>
+                        <div class="progress-container">
+                            <div class="progress-info">
+                                <span class="progress-text">Processing</span>
+                                <span class="progress-percentage">0%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progressFill"></div>
+                            </div>
+                        </div>
+                        <div class="loading-steps">
+                            <div class="step active">
+                                <i class="fas fa-check"></i>
+                                <span>Upload Complete</span>
+                            </div>
+                            <div class="step">
+                                <i class="fas fa-sync"></i>
+                                <span>AI Detection</span>
+                            </div>
+                            <div class="step">
+                                <i class="fas fa-ruler-combined"></i>
+                                <span>Dimension Analysis</span>
+                            </div>
+                            <div class="step">
+                                <i class="fas fa-calculator"></i>
+                                <span>Cost Calculation</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div id="results" class="results-section hidden">
+                <!-- Results will be populated here -->
+            </div>
+
+            <!-- Error Section -->
+            <div id="error" class="error-section hidden">
+                <!-- Errors will be populated here -->
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>PotholeInspector Pro</h4>
+                    <p>Advanced AI-powered road infrastructure analysis platform</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Technology</h4>
+                    <p>YOLOv8 • Computer Vision • Deep Learning • Flask</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>support@potholeinspector.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 PotholeInspector Pro. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
