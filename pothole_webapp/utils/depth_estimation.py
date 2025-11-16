@@ -2,10 +2,23 @@ import cv2
 import numpy as np
 from ultralytics import YOLO
 import matplotlib.pyplot as plt
+import os  # ADD THIS IMPORT
 
 class PotholeDepthEstimator:
     def __init__(self):
-        self.detection_model = YOLO('D:/Ujjwal/Pothole detection/runs/detect/pothole_detection_v1/weights/best.pt')
+        # FIXED: Use relative path instead of absolute Windows path
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        model_path = os.path.join(current_dir, '../../runs/detect/pothole_detection_v1/weights/best.pt')
+        
+        print(f"🔍 Loading model from: {model_path}")
+        
+        # Check if model exists
+        if not os.path.exists(model_path):
+            print(f"❌ Model not found at: {model_path}")
+            # Try current directory
+            model_path = 'runs/detect/pothole_detection_v1/weights/best.pt'
+        
+        self.detection_model = YOLO(model_path)
         
         # Camera calibration (can be adjusted by user)
         self.pixels_per_meter = 2000  # Default: 2000 pixels = 1 meter
