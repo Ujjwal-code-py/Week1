@@ -33,7 +33,7 @@ Transforming road maintenance with computer vision and deep learning
 - Support
   
 ## Overview
-##### Pothole Inspector Pro is a comprehensive web application that leverages artificial intelligence to automatically detect potholes in road images and videos. It provides detailed analysis including dimension measurement, repair cost estimation, and professional reporting for road maintenance teams, government agencies, and infrastructure companies.
+### Pothole Inspector Pro is a comprehensive web application that leverages artificial intelligence to automatically detect potholes in road images and videos. It provides detailed analysis including dimension measurement, repair cost estimation, and professional reporting for road maintenance teams, government agencies, and infrastructure companies.
 
 ##  What Problem We Solve
 - Manual Inspection Costs: Reduces time and cost of manual road surveys
