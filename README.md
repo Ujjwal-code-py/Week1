@@ -1,10 +1,4 @@
-🛣️ Pothole Inspector Pro
-<div align="center">
-https://img.shields.io/badge/Python-3.13.2-blue
-https://img.shields.io/badge/Backend-Flask-green
-https://img.shields.io/badge/Model-YOLOv8-red
-https://img.shields.io/badge/Storage-Cloudinary-orange
-https://img.shields.io/badge/Architecture-REST%2520API-success
+# 🛣️ Pothole Inspector Pro
 
 AI-Powered Road Infrastructure Analysis & Cost Estimation Platform
 
